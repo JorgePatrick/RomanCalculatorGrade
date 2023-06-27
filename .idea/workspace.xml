@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8d526fd-5766-4be3-99ce-cdaf453cfcfe" name="Changes" comment="Sum between Roman Numbers 1 to 3">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/RomanCalculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/jorgepatrick/RomanCalculatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/RomanCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/RomanCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/jorgepatrick/RomanCalculatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/jorgepatrick/RomanCalculatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +50,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="155bad74-3365-4d9b-81c9-6153e3e00c56" />
+        <option name="url" value="https://github.com/JorgePatrick/RomanCalculatorGrade.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -64,6 +78,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/jorge/IdeaProjects/RomanCalculatorGradle/RomanCalculatorGrade",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>

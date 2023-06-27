@@ -1,32 +1,31 @@
 package com.jorgepatrick;
+import static com.jorgepatrick.RomanNumbers.*;
 
 public class RomanCalculator {
     public String sumRomanNumbers(final String firstAddend, final String secondAddend) {
 
-        int firstArabicNumber = 0;
-        int secondArabicNumber = 0;
-        firstArabicNumber = parseRomanToArabic(firstAddend);
-        secondArabicNumber = parseRomanToArabic(secondAddend);
+        final int firstArabicNumber = parseRomanToArabic(firstAddend);
+        final int secondArabicNumber = parseRomanToArabic(secondAddend);
 
         int arabicNumberSum = firstArabicNumber + secondArabicNumber;
 
         return parseArabicToRoman(arabicNumberSum);
     }
 
-    private String parseArabicToRoman(int arabicNumberSum) {
+    private String parseArabicToRoman(final int arabicNumberSum) {
         String romanNumber = "";
         int unitQuantity = 0;
 
         if (arabicNumberSum == 5) {
-            return "V";
+            return V;
         }
 
         if (arabicNumberSum == 4) {
-            return "IV";
+            return IV;
         }
 
         if (arabicNumberSum > 5) {
-            romanNumber = "V";
+            romanNumber = V;
             unitQuantity = arabicNumberSum - 5;
 
         } else {
