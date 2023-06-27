@@ -1,5 +1,5 @@
 package com.jorgepatrick;
-import static com.jorgepatrick.RomanNumbers.*;
+import static com.jorgepatrick.RomanSymbols.*;
 
 public class RomanCalculator {
     public String sumRomanNumbers(final String firstAddend, final String secondAddend) {
@@ -21,7 +21,7 @@ public class RomanCalculator {
         }
 
         if (arabicNumberSum == 4) {
-            return IV;
+            return I + V;
         }
 
         if (arabicNumberSum > 5) {
@@ -33,7 +33,7 @@ public class RomanCalculator {
         }
 
         for (int i = 0; i < unitQuantity; i++) {
-            romanNumber += 'I';
+            romanNumber += I;
         }
 
         return romanNumber;
@@ -44,7 +44,7 @@ public class RomanCalculator {
         int unit = 0;
 
         for (int i = 0; i < romanNumber.length(); i++) {
-            if (romanNumber.toUpperCase().charAt(i) == 'I') {
+            if (romanNumber.toUpperCase().charAt(i) == I.charAt(0)) {
                 unit += 1;
             }
         }
