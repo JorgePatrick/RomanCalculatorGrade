@@ -4,6 +4,12 @@ import static com.jorgepatrick.Digits.*;
 import static com.jorgepatrick.RomanSymbols.*;
 
 public class NumberConverter {
+
+    static final String[] RomanOnes = {I, X, C, M};
+    static final String[] RomanTens = {X, C, M};
+    static final String[] RomanFives = {V, L, D};
+
+
     public String parseArabicToRoman(final int arabicNumberSum) {
         String romanNumber = "";
 
@@ -23,9 +29,6 @@ public class NumberConverter {
     }
 
     private String setRomanDigit(int arabicDigit, Digits digit) {
-        final String[] RomanOnes = {"I", "X", "C", "M"};
-        final String[] RomanTens = {"X", "C", "M"};
-        final String[] RomanFives = {"V", "L", "D"};
 
         String romanDigit = "";
         int onesQuantity = 0;
