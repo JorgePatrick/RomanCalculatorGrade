@@ -20,7 +20,14 @@ public class RomanCalculatorTest {
                 Arguments.of("I", "II", "III"),
                 Arguments.of("I", "III", "IV"),
                 Arguments.of("III", "III", "VI"),
-                Arguments.of("III", "II", "V")
+                Arguments.of("III", "II", "V"),
+                Arguments.of("I", "IV", "V"),
+                Arguments.of("V", "II", "VII"),
+                Arguments.of("V", "V", "X"),
+                Arguments.of("III", "VI", "IX"),
+                Arguments.of("VII", "V", "XII"),
+                Arguments.of("VI", "VIII", "XIV"),
+                Arguments.of("VIII", "VIII", "XVI")
         );
     }
 }
