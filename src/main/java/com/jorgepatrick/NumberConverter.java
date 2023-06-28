@@ -5,9 +5,9 @@ import static com.jorgepatrick.RomanSymbols.*;
 
 public class NumberConverter {
 
-    static final String[] RomanOnes = {I, X, C, M};
-    static final String[] RomanTens = {X, C, M};
-    static final String[] RomanFives = {V, L, D};
+    static final RomanSymbols[] RomanOnes = {I, X, C, M};
+    static final RomanSymbols[] RomanTens = {X, C, M};
+    static final RomanSymbols[] RomanFives = {V, L, D};
 
 
     public String parseArabicToRoman(final int arabicNumberSum) {
@@ -38,19 +38,19 @@ public class NumberConverter {
         }
 
         if (arabicDigit == 9) {
-            return RomanOnes[digit.getValue()] + RomanTens[digit.getValue()];
+            return RomanOnes[digit.value()].value() + RomanTens[digit.value()].value();
         }
 
         if (arabicDigit == 5) {
-            return RomanFives[digit.getValue()];
+            return RomanFives[digit.value()].value();
         }
 
         if (arabicDigit == 4) {
-            return RomanOnes[digit.getValue()] + RomanFives[digit.getValue()];
+            return RomanOnes[digit.value()].value() + RomanFives[digit.value()].value();
         }
 
         if (arabicDigit > 5) {
-            romanDigit = RomanFives[digit.getValue()];
+            romanDigit = RomanFives[digit.value()].value();
             onesQuantity = arabicDigit - 5;
 
         } else {
@@ -58,7 +58,7 @@ public class NumberConverter {
         }
 
         for (int i = 0; i < onesQuantity; i++) {
-            romanDigit += RomanOnes[digit.getValue()];
+            romanDigit += RomanOnes[digit.value()].value();
         }
 
         return romanDigit;
@@ -69,17 +69,17 @@ public class NumberConverter {
         int unit = 0;
 
         for (int currentDigit = 0; currentDigit < romanNumber.length(); currentDigit++) {
-            if (romanNumber.toUpperCase().charAt(currentDigit) == I.charAt(0)) {
+            if (romanNumber.toUpperCase().charAt(currentDigit) == I.value().charAt(0)) {
                 int nextDigit = currentDigit + 1;
                 if (nextDigit == romanNumber.length() ||
-                    romanNumber.toUpperCase().charAt(nextDigit) == I.charAt(0)) {
+                    romanNumber.toUpperCase().charAt(nextDigit) == I.value().charAt(0)) {
                     unit += 1;
                 } else {
                     unit -= 1;
                 }
             }
 
-            if (romanNumber.toUpperCase().charAt(currentDigit) == V.charAt(0)) {
+            if (romanNumber.toUpperCase().charAt(currentDigit) == V.value().charAt(0)) {
                 unit += 5;
             }
         }

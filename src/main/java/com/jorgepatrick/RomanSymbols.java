@@ -1,11 +1,20 @@
 package com.jorgepatrick;
 
-public class RomanSymbols {
-    public static final String I = "I";
-    public static final String V = "V";
-    public static final String X = "X";
-    public static final String L = "L";
-    public static final String C = "C";
-    public static final String D = "D";
-    public static final String M = "M";
+public enum RomanSymbols {
+    I("I"),
+    V("V"),
+    X("X"),
+    L("L"),
+    C("C"),
+    D("D"),
+    M("M");
+
+    private final String value;
+
+    RomanSymbols(String value) {
+        this.value = value;
+    }
+    public String value() {
+        return this.value;
+    }
 }
