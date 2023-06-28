@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="0f9b8cc1-b743-4bf5-97a8-8d9c846a70d8" name="Changes" comment="">
+=======
 <<<<<<< Updated upstream
     <list default="true" id="a8d526fd-5766-4be3-99ce-cdaf453cfcfe" name="Changes" comment="Sum between Roman Numbers 1 to 3">
+>>>>>>> 2303349f1dfdc570692312150f6b3eb4d5d67789
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/NumberConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/NumberConverter.java" afterDir="false" />
     </list>
@@ -77,15 +81,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jorge/IdeaProjects/RomanCalculatorGrade&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "full.screen.before.presentation.mode": "true",
+    "last_opened_file_path": "C:/Users/jorge/IdeaProjects/RomanCalculatorGrade",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Language Defaults"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.jorgepatrick" />

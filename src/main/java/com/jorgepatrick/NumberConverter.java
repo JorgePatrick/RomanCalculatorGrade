@@ -68,18 +68,18 @@ public class NumberConverter {
 
         int unit = 0;
 
-        for (int i = 0; i < romanNumber.length(); i++) {
-            if (romanNumber.toUpperCase().charAt(i) == I.charAt(0)) {
-                int j = i + 1;
-                if (j == romanNumber.length() ||
-                    romanNumber.toUpperCase().charAt(j) == I.charAt(0)) {
+        for (int currentDigit = 0; currentDigit < romanNumber.length(); currentDigit++) {
+            if (romanNumber.toUpperCase().charAt(currentDigit) == I.charAt(0)) {
+                int nextDigit = currentDigit + 1;
+                if (nextDigit == romanNumber.length() ||
+                    romanNumber.toUpperCase().charAt(nextDigit) == I.charAt(0)) {
                     unit += 1;
                 } else {
                     unit -= 1;
                 }
             }
 
-            if (romanNumber.toUpperCase().charAt(i) == V.charAt(0)) {
+            if (romanNumber.toUpperCase().charAt(currentDigit) == V.charAt(0)) {
                 unit += 5;
             }
         }
