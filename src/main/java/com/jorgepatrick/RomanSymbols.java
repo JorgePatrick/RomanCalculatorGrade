@@ -14,7 +14,7 @@ public enum RomanSymbols {
     RomanSymbols(String value) {
         this.value = value;
     }
-    public String getValue() {
+    public String value() {
         return this.value;
     }
 }

@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="494a478d-f512-4d19-a70a-92a10d3f9cbd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/Digits.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/Digits.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/NumberConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/NumberConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/RomanSymbols.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jorgepatrick/RomanSymbols.java" afterDir="false" />
     </list>

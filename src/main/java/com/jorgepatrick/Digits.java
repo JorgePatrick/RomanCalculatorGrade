@@ -11,7 +11,7 @@ public enum Digits {
     Digits(int value) {
         this.value = value;
     }
-    public int getValue() {
+    public int value() {
         return this.value;
     }
 }
