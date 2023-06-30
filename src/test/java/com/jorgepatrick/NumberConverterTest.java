@@ -1,8 +1,10 @@
 package com.jorgepatrick;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mock;
 
 import java.util.stream.Stream;
 
@@ -10,10 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NumberConverterTest {
 
+    private NumberConverter numberConverter;
+    @Mock
+    private RomanNumberValidator romanNumberValidator;
+
+    @BeforeEach
+    public void setup(){
+        numberConverter = new NumberConverter(romanNumberValidator);
+    }
+
     @ParameterizedTest
     @MethodSource("provideRomanNumbersForConversion")
     public void convertToRoman(int arabicNumber, String romanNumber) {
-        NumberConverter numberConverter = new NumberConverter();
         assertEquals(romanNumber, numberConverter.parseArabicToRoman(arabicNumber));
     }
     private static Stream<Arguments> provideRomanNumbersForConversion() {
@@ -43,7 +53,6 @@ public class NumberConverterTest {
     @ParameterizedTest
     @MethodSource("provideArabicNumbersForConversion")
     public void convertToArabic(String romanNumber, int arabicNumber) {
-        NumberConverter numberConverter = new NumberConverter();
         assertEquals(arabicNumber, numberConverter.parseRomanToArabic(romanNumber));
     }
     private static Stream<Arguments> provideArabicNumbersForConversion() {

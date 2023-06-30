@@ -26,6 +26,7 @@ public class RomanNumberValidatorTest {
         return Stream.of(
                 Arguments.of(null, "Roman Number Cannot be Null"),
                 Arguments.of("A", "Invalid Roman Digit"),
+                Arguments.of("XVAI", "Invalid Roman Digit"),
                 Arguments.of("IIII", "Invalid Roman Number - More than two chars after an I"),
                 Arguments.of("IXCI", "Invalid Roman Number - More than two chars after an I"),
                 Arguments.of("IL", "Invalid Roman Number - Invalid Roman Symbol after an I"),

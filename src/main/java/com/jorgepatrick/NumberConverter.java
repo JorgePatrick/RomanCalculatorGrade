@@ -8,7 +8,11 @@ public class NumberConverter {
     static final RomanSymbols[] RomanOnes = {I, X, C, M};
     static final RomanSymbols[] RomanTens = {X, C, M};
     static final RomanSymbols[] RomanFives = {V, L, D};
+    private final RomanNumberValidator romanNumberValidator;
 
+    public NumberConverter(RomanNumberValidator romanNumberValidator) {
+        this.romanNumberValidator = romanNumberValidator;
+    }
 
     public String parseArabicToRoman(final int arabicNumberSum) {
         String romanNumber = "";
@@ -65,6 +69,8 @@ public class NumberConverter {
     }
 
     public int parseRomanToArabic(final String romanNumber) {
+
+        romanNumberValidator.validateRomanNumber(romanNumber);
 
         int unit = 0;
 

@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RomanCalculatorIntegrationTest {
     private NumberConverter converter;
+    private RomanNumberValidator romanNumberValidator;
 
     @BeforeEach
     public void setup(){
-        converter = new NumberConverter();
+        romanNumberValidator = new RomanNumberValidator();
+        converter = new NumberConverter(romanNumberValidator);
     }
 
     @ParameterizedTest
