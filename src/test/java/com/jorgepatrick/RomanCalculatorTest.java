@@ -13,9 +13,9 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class RomanCalculatorTest {
+    private RomanCalculator romanCalculator;
     @Mock
     private NumberConverter converter;
-    RomanCalculator romanCalculator;
 
     @BeforeEach
     public void setup(){
