@@ -4,13 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mock;
-import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 public class NumberConverterTest {
 
@@ -56,7 +53,6 @@ public class NumberConverterTest {
     @ParameterizedTest
     @MethodSource("provideArabicNumbersForConversion")
     public void convertToArabic(String romanNumber, int arabicNumber) {
-//        when(romanNumberValidator.validateRomanNumber(romanNumber));
         assertEquals(arabicNumber, numberConverter.parseRomanToArabic(romanNumber));
     }
     private static Stream<Arguments> provideArabicNumbersForConversion() {
