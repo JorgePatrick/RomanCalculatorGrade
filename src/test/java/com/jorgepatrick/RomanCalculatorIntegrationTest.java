@@ -49,25 +49,22 @@ public class RomanCalculatorIntegrationTest {
             romanCalculator.sumRomanNumbers(firstAddend, secondAddend);
         });
         String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(exceptionMessage));
+        assertTrue(actualMessage.contentEquals(exceptionMessage));
     }
     private static Stream<Arguments> provideNonRomanNumbersForValidation() {
         return Stream.of(
                 Arguments.of(null, null, "Roman Number Cannot be Null"),
                 Arguments.of("A", "A", "Invalid Roman Digit"),
                 Arguments.of("XVAI", "XVAI", "Invalid Roman Digit"),
-                Arguments.of("IIII", "IIII", "Invalid Roman Number - More than two chars after an I"),
-                Arguments.of("IXCI", "IXCI", "Invalid Roman Number - More than two chars after an I"),
+                Arguments.of("IIII", "IIII", "Invalid Roman Number - Invalid Roman Symbol after an III"),
+                Arguments.of("IXCI", "IXCI", "Invalid Roman Number - Unexpected char after IX"),
                 Arguments.of("IL", "IL", "Invalid Roman Number - Invalid Roman Symbol after an I"),
                 Arguments.of("IC", "IC", "Invalid Roman Number - Invalid Roman Symbol after an I"),
                 Arguments.of("ID", "ID", "Invalid Roman Number - Invalid Roman Symbol after an I"),
                 Arguments.of("IM", "IM", "Invalid Roman Number - Invalid Roman Symbol after an I"),
                 Arguments.of("IVI", "IVI", "Invalid Roman Number - Unexpected char after IV"),
                 Arguments.of("IXC", "IXC", "Invalid Roman Number - Unexpected char after IX"),
-                Arguments.of("VIIII", "VIIII", "Invalid Roman Number"),
-                Arguments.of("VIIII", "VIIII", "Invalid Roman Number"),
-                Arguments.of("VIIII", "VIIII", "Invalid Roman Number"),
-                Arguments.of("VIIII", "VIIII", "Invalid Roman Number")
+                Arguments.of("VIIII", "VIIII", "Invalid Roman Number - Invalid Roman Symbol after an III")
         );
     }
 

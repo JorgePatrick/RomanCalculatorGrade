@@ -9,12 +9,12 @@ public enum RomanSymbols {
     D("D"),
     M("M");
 
-    private final String value;
+    private final String romanValue;
 
-    RomanSymbols(String value) {
-        this.value = value;
+    RomanSymbols(String romanValue) {
+        this.romanValue = romanValue;
     }
     public String value() {
-        return this.value;
+        return this.romanValue;
     }
 }

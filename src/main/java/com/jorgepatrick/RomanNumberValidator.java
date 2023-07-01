@@ -1,7 +1,6 @@
 package com.jorgepatrick;
 
 import static com.jorgepatrick.RomanSymbols.*;
-import static com.jorgepatrick.RomanSymbols.I;
 
 public class RomanNumberValidator {
     public void validateRomanNumber(final String romanNumber) {
@@ -17,34 +16,66 @@ public class RomanNumberValidator {
         }
 
         for (int currentDigit = 0; currentDigit < romanNumber.length(); currentDigit++) {
-            if (romanNumber.toUpperCase().charAt(currentDigit) == I.value().charAt(0)) {
+            int nextDigit = currentDigit + 1;
 
-                int nextDigit = currentDigit + 1;
+            if (nextDigit == romanNumber.length()) {
+                continue;
+            }
 
-                if (nextDigit == romanNumber.length()) {
-                    continue;
+            switch (romanNumber.toUpperCase().charAt(currentDigit)){
+                case 'I' -> {
+                    validateI(romanNumber, nextDigit);
+                }
+                case 'V' -> {
+                    validateV(romanNumber, nextDigit);
+                }
+                case 'X', 'L', 'C', 'D', 'M' -> {
+                    break;
+                }
+            }
+        }
+    }
+
+    private void validateI(String romanNumber, int nextDigit) {
+
+        int twoAfterCurrentDigit = nextDigit + 1;
+
+        switch (romanNumber.toUpperCase().charAt(nextDigit)) {
+            case 'I' -> {
+                if (twoAfterCurrentDigit == romanNumber.length()) {
+                    break;
+                }
+                if (romanNumber.toUpperCase().charAt(twoAfterCurrentDigit) != I.value().charAt(0)) {
+                    throw new IllegalArgumentException("Invalid Roman Number - After two I there can only be another I");
                 }
 
-                if (nextDigit + 2 < romanNumber.length()) {
-                    throw new IllegalArgumentException("Invalid Roman Number - More than two chars after an I");
+                int threeAfterCurrentDigit = nextDigit + 2;
+
+                if (threeAfterCurrentDigit < romanNumber.length()) {
+                    throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an III");
                 }
 
-                int twoAfterCurrentDigit = currentDigit + 2;
-
-                switch (romanNumber.toUpperCase().charAt(nextDigit)) {
-                    case 'V' -> {
-                        if (twoAfterCurrentDigit < romanNumber.length()) {
-                            throw new IllegalArgumentException("Invalid Roman Number - Unexpected char after IV");
-                        }
-                    }
-                    case 'X' -> {
-                        if (twoAfterCurrentDigit < romanNumber.length()) {
-                            throw new IllegalArgumentException("Invalid Roman Number - Unexpected char after IX");
-                        }
-                    }
-                    case 'L', 'C', 'D', 'M' ->
-                            throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an I");
+            }
+            case 'V' -> {
+                if (twoAfterCurrentDigit < romanNumber.length()) {
+                    throw new IllegalArgumentException("Invalid Roman Number - Unexpected char after IV");
                 }
+            }
+            case 'X' -> {
+                if (twoAfterCurrentDigit < romanNumber.length()) {
+                    throw new IllegalArgumentException("Invalid Roman Number - Unexpected char after IX");
+                }
+            }
+            case 'L', 'C', 'D', 'M' ->
+                    throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an I");
+        }
+    }
+
+    private void validateV(String romanNumber, int nextDigit) {
+
+        for (int currentDigit = nextDigit; currentDigit < romanNumber.length(); currentDigit++) {
+            if (romanNumber.toUpperCase().charAt(currentDigit) != I.value().charAt(0)) {
+                throw new IllegalArgumentException("Invalid Roman Number - No char different I allowed after one V");
             }
         }
     }
