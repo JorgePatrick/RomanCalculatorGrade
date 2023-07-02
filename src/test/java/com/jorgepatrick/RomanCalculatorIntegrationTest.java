@@ -39,7 +39,31 @@ public class RomanCalculatorIntegrationTest {
                 Arguments.of("III", "VI", "IX"),
                 Arguments.of("VII", "V", "XII"),
                 Arguments.of("VI", "VIII", "XIV"),
-                Arguments.of("VIII", "VIII", "XVI")
+                Arguments.of("VIII", "VIII", "XVI"),
+                Arguments.of("X", "VII", "XVII"),
+                Arguments.of("IX", "IX", "XVIII"),
+                Arguments.of("X", "IX", "XIX"),
+                Arguments.of("X", "X", "XX"),
+                Arguments.of("XIV", "VII", "XXI"),
+                Arguments.of("XIII", "IX", "XXII"),
+                Arguments.of("XIII", "X", "XXIII"),
+                Arguments.of("XII", "XII", "XXIV"),
+                Arguments.of("XX", "V", "XXV"),
+                Arguments.of("XXX", "VI", "XXXVI"),
+                Arguments.of("XX", "XVII", "XXXVII"),
+                Arguments.of("X", "XXVIII", "XXXVIII"),
+                Arguments.of("XX", "XIX", "XXXIX"),
+                Arguments.of("XX", "XX", "XL"),
+                Arguments.of("XX", "XXI", "XLI"),
+                Arguments.of("XXII", "XX", "XLII"),
+                Arguments.of("XX", "XXIII", "XLIII"),
+                Arguments.of("XXIV", "XX", "XLIV"),
+                Arguments.of("XXX", "XV", "XLV"),
+                Arguments.of("XXVIII", "XXVIII", "LVI"),
+                Arguments.of("XXVIII", "XXIX", "LVII"),
+                Arguments.of("XXIX", "XXIX", "LVIII"),
+                Arguments.of("XXX", "XXIX", "LIX"),
+                Arguments.of("XXX", "XXX", "LX")
         );
     }
     @ParameterizedTest

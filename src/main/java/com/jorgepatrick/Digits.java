@@ -1,17 +1,20 @@
 package com.jorgepatrick;
 
 public enum Digits {
-    UNIT(0),
-    TEN(1),
-    HUNDRED(2),
-    THOUSAND(3);
+    UNIT(0, 1),
+    TEN(1, 10),
+    HUNDRED(2, 100),
+    THOUSAND(3, 1000);
 
-    private final int value;
+    private final int position;
+    private final int arabicValue;
 
-    Digits(int value) {
-        this.value = value;
+    Digits(int position, int arabicValue) {
+        this.position = position;
+        this.arabicValue = arabicValue;
     }
-    public int value() {
-        return this.value;
+    public int position() {
+        return this.position;
     }
+    public int arabicValue() { return this.arabicValue; }
 }

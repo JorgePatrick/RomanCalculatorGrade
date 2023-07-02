@@ -1,23 +1,27 @@
 package com.jorgepatrick;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockitoExtension.class)
 public class NumberConverterTest {
 
     private NumberConverter numberConverter;
-//    @Mock
+    @Mock
     private RomanNumberValidator romanNumberValidator;
 
     @BeforeEach
     public void setup(){
-        romanNumberValidator = new RomanNumberValidator();
+//        romanNumberValidator = new RomanNumberValidator();
         numberConverter = new NumberConverter(romanNumberValidator);
     }
 
@@ -47,7 +51,27 @@ public class NumberConverterTest {
                 Arguments.of(17, "XVII"),
                 Arguments.of(18, "XVIII"),
                 Arguments.of(19, "XIX"),
-                Arguments.of(20, "XX")
+                Arguments.of(20, "XX"),
+                Arguments.of(21, "XXI"),
+                Arguments.of(22, "XXII"),
+                Arguments.of(23, "XXIII"),
+                Arguments.of(24, "XXIV"),
+                Arguments.of(25, "XXV"),
+                Arguments.of(36, "XXXVI"),
+                Arguments.of(37, "XXXVII"),
+                Arguments.of(38, "XXXVIII"),
+                Arguments.of(39, "XXXIX"),
+                Arguments.of(40, "XL"),
+                Arguments.of(41, "XLI"),
+                Arguments.of(42, "XLII"),
+                Arguments.of(43, "XLIII"),
+                Arguments.of(44, "XLIV"),
+                Arguments.of(45, "XLV"),
+                Arguments.of(56, "LVI"),
+                Arguments.of(57, "LVII"),
+                Arguments.of(58, "LVIII"),
+                Arguments.of(59, "LIX"),
+                Arguments.of(60, "LX")
         );
     }
     @ParameterizedTest
@@ -64,8 +88,8 @@ public class NumberConverterTest {
                 Arguments.of("V", 5),
                 Arguments.of("VI", 6),
                 Arguments.of("VII", 7),
-                Arguments.of("VIII", 8)
-/**                Arguments.of("IX", 9),
+                Arguments.of("VIII", 8),
+                Arguments.of("IX", 9),
                 Arguments.of("X", 10),
                 Arguments.of("XI", 11),
                 Arguments.of("XII", 12),
@@ -76,7 +100,17 @@ public class NumberConverterTest {
                 Arguments.of("XVII", 17),
                 Arguments.of("XVIII", 18),
                 Arguments.of("XIX", 19),
-                Arguments.of("XX", 20) */
+                Arguments.of("XX", 20),
+                Arguments.of("XXI", 21),
+                Arguments.of("XXII", 22),
+                Arguments.of("XXIII", 23),
+                Arguments.of("XXIV", 24),
+                Arguments.of("XXV", 25),
+                Arguments.of("XXVI", 26),
+                Arguments.of("XXVII", 27),
+                Arguments.of("XXVIII", 28),
+                Arguments.of("XXIX", 29),
+                Arguments.of("XXX", 30)
         );
     }
 }
