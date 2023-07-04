@@ -1,20 +1,21 @@
 package com.jorgepatrick;
 
 public enum RomanSymbols {
-    I("I"),
-    V("V"),
-    X("X"),
-    L("L"),
-    C("C"),
-    D("D"),
-    M("M");
+    I(1),
+    V(5),
+    X(10),
+    L(50),
+    C(100),
+    D(500),
+    M(1000);
 
-    private final String romanValue;
+    private final int arabicValue;
 
-    RomanSymbols(String romanValue) {
-        this.romanValue = romanValue;
+    RomanSymbols(int arabicValue) {
+        this.arabicValue = arabicValue;
     }
-    public String value() {
-        return this.romanValue;
+
+    public int arabicValue() {
+        return this.arabicValue;
     }
 }

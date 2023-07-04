@@ -11,12 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RomanCalculatorIntegrationTest {
     private RomanCalculator romanCalculator;
     private NumberConverter converter;
-    private RomanNumberValidator romanNumberValidator;
 
     @BeforeEach
     public void setup(){
-        romanNumberValidator = new RomanNumberValidator();
-        converter = new NumberConverter(romanNumberValidator);
+        converter = new NumberConverter();
         romanCalculator = new RomanCalculator(converter);
     }
 

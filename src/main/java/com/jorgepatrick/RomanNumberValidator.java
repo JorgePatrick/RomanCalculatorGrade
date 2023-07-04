@@ -46,7 +46,7 @@ public class RomanNumberValidator {
                     break;
                 }
 
-                if (romanNumber.toUpperCase().charAt(twoAfterCurrentDigit) != I.value().charAt(0)) {
+                if (romanNumber.toUpperCase().charAt(twoAfterCurrentDigit) != I.name().charAt(0)) {
                     throw new IllegalArgumentException("Invalid Roman Number - After two I there can only be another I");
                 }
 
@@ -75,20 +75,20 @@ public class RomanNumberValidator {
     private void validateV(String romanNumber, int nextDigit) {
 
         for (int currentDigit = nextDigit; currentDigit < romanNumber.length(); currentDigit++) {
-            if (romanNumber.toUpperCase().charAt(currentDigit) != I.value().charAt(0)) {
+            if (romanNumber.toUpperCase().charAt(currentDigit) != I.name().charAt(0)) {
                 throw new IllegalArgumentException("Invalid Roman Number - No char different I allowed after one V");
             }
         }
     }
 
     private boolean charIsRomanSymbol(char romanChar) {
-        return (romanChar == I.value().charAt(0) ||
-                romanChar == V.value().charAt(0) ||
-                romanChar == X.value().charAt(0) ||
-                romanChar == L.value().charAt(0) ||
-                romanChar == D.value().charAt(0) ||
-                romanChar == C.value().charAt(0) ||
-                romanChar == M.value().charAt(0));
+        return (romanChar == I.name().charAt(0) ||
+                romanChar == V.name().charAt(0) ||
+                romanChar == X.name().charAt(0) ||
+                romanChar == L.name().charAt(0) ||
+                romanChar == D.name().charAt(0) ||
+                romanChar == C.name().charAt(0) ||
+                romanChar == M.name().charAt(0));
     }
 
     private boolean isThereCharInPosition(String romanNumber, int nextDigit) {
