@@ -4,7 +4,6 @@ import static com.jorgepatrick.RomanSymbols.*;
 
 public class RomanNumberValidator {
     public void validateRomanNumber(final String romanNumber) {
-
         if (romanNumber == null) {
             throw new IllegalArgumentException("Roman Number Cannot be Null");
         }
@@ -37,7 +36,6 @@ public class RomanNumberValidator {
     }
 
     private void validateI(String romanNumber, int nextDigit) {
-
         int twoAfterCurrentDigit = nextDigit + 1;
 
         switch (romanNumber.toUpperCase().charAt(nextDigit)) {
@@ -55,7 +53,6 @@ public class RomanNumberValidator {
                 if (isThereCharInPosition(romanNumber, threeAfterCurrentDigit)) {
                     throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an III");
                 }
-
             }
             case 'V' -> {
                 if (twoAfterCurrentDigit < romanNumber.length()) {
@@ -73,7 +70,6 @@ public class RomanNumberValidator {
     }
 
     private void validateV(String romanNumber, int nextDigit) {
-
         for (int currentDigit = nextDigit; currentDigit < romanNumber.length(); currentDigit++) {
             if (romanNumber.toUpperCase().charAt(currentDigit) != I.name().charAt(0)) {
                 throw new IllegalArgumentException("Invalid Roman Number - No char different I allowed after one V");

@@ -18,14 +18,13 @@ public class NumberConverter {
         for(int position = arabicNumberString.length() - 1; position >= 0; position--) {
             romanNumber += setRomanDigit(arabicDigits[position], RomanDigits[position]);
         }
-
         return romanNumber;
     }
 
     private int[] splitNumberInReverse(int numberToSplit, int length) {
         int[] numberInReverse = new int[length];
-
         int position = 0;
+
         while (numberToSplit > 0) {
             numberInReverse[position] =  ( numberToSplit % 10);
             numberToSplit = numberToSplit / 10;
@@ -35,7 +34,6 @@ public class NumberConverter {
     }
 
     private String setRomanDigit(int arabicDigit, Digits digit) {
-
         String romanDigit = "";
         int onesQuantity = 0;
 

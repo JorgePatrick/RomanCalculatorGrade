@@ -2,10 +2,8 @@ package com.jorgepatrick;
 
 import java.util.Arrays;
 import java.util.List;
-
 import static com.jorgepatrick.Digits.*;
 import static com.jorgepatrick.RomanSymbols.*;
-import static com.jorgepatrick.RomanSymbols.M;
 import static com.jorgepatrick.Utilities.enumValuesInList;
 
 public class RomanNumber {
@@ -50,13 +48,13 @@ public class RomanNumber {
     private int getArabicValue (String romanDigit) {
         int arabicValue = 0;
         List<RomanSymbols> romanSymbols = enumValuesInList(RomanSymbols.class);
+
         for (RomanSymbols romanSymbol : romanSymbols) {
             if (romanSymbol.name().equals(romanDigit)) {
                 arabicValue = romanSymbol.arabicValue();
                 break;
             }
         }
-
         return arabicValue;
     }
 
