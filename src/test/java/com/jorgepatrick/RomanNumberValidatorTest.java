@@ -1,21 +1,43 @@
 package com.jorgepatrick;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class RomanNumberValidatorTest {
+    RomanNumberValidator romanNumberValidator;
+//    @Mock
+    private RomanNumber romanNumber;
+
+    @BeforeEach
+    public void setup(){
+        romanNumberValidator = new RomanNumberValidator();
+        romanNumber = new RomanNumber(romanNumberValidator);
+    }
 
     @ParameterizedTest
     @MethodSource("provideNonRomanNumbersForValidation")
-    public void romanNumberValidation(String romanNumber, String exceptionMessage) {
+    public void romanNumberValidation(String romanNumberStr, String exceptionMessage) {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            RomanNumberValidator romanNumberValidator = new RomanNumberValidator();
+            romanNumber.setRomanNumberStr(romanNumberStr);
+//            Methods to mock
+//            romanNumber.isNull();
+//            romanNumber.length();
+//            romanNumber.digitAt(int: currentDigit);
+//            romanNumber.isThereCharInPosition(int: nextDigit);
+
+//            when(romanNumber.isNull()).thenReturn(true);
             romanNumberValidator.validateRomanNumber(romanNumber);
         });
         String actualMessage = exception.getMessage();

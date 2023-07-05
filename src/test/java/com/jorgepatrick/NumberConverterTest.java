@@ -11,21 +11,23 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class NumberConverterTest {
-
     private NumberConverter numberConverter;
+    @Mock
+    private RomanNumber romanNumber;
 
     @BeforeEach
     public void setup(){
-        numberConverter = new NumberConverter();
+        numberConverter = new NumberConverter(romanNumber);
     }
 
     @ParameterizedTest
     @MethodSource("provideRomanNumbersForConversion")
-    public void convertToRoman(int arabicNumber, String romanNumber) {
-        assertEquals(romanNumber, numberConverter.parseArabicToRoman(arabicNumber));
+    public void convertToRoman(int arabicNumber, String romanNumberStr) {
+        assertEquals(romanNumberStr, numberConverter.parseArabicToRoman(arabicNumber));
     }
     private static Stream<Arguments> provideRomanNumbersForConversion() {
         return Stream.of(
@@ -73,8 +75,9 @@ public class NumberConverterTest {
     }
     @ParameterizedTest
     @MethodSource("provideArabicNumbersForConversion")
-    public void convertToArabic(String romanNumber, int arabicNumber) {
-        assertEquals(arabicNumber, numberConverter.parseRomanToArabic(romanNumber));
+    public void convertToArabic(String romanNumberStr, int arabicNumber) {
+        when(romanNumber.arabicNumber()).thenReturn(arabicNumber);
+        assertEquals(arabicNumber, numberConverter.parseRomanToArabic(romanNumberStr));
     }
     private static Stream<Arguments> provideArabicNumbersForConversion() {
         return Stream.of(

@@ -1,68 +1,82 @@
 package com.jorgepatrick;
 
 import java.util.Arrays;
-import java.util.List;
-import static com.jorgepatrick.Digits.*;
 import static com.jorgepatrick.RomanSymbols.*;
-import static com.jorgepatrick.Utilities.enumValuesInList;
 
 public class RomanNumber {
-    private final String romanNumberStr;
+    private String romanNumberStr;
     static final String[] RomanOnes = {I.name(), X.name(), C.name(), M.name()};
-    static final Digits[] RomanDigits = {UNIT, TEN, HUNDRED, THOUSAND};
+    private final RomanNumberValidator romanNumberValidator;
 
-    private final RomanNumberValidator romanNumberValidator = new RomanNumberValidator();
+    public RomanNumber(RomanNumberValidator romanNumberValidator) {
+        this.romanNumberValidator = romanNumberValidator;
+    }
 
-    public RomanNumber(String romanNumberStr) {
-        this.romanNumberStr = romanNumberStr;
+    public void setRomanNumberStr(String romanNumberStr) {
+        if (romanNumberStr == null) {
+            this.romanNumberStr = romanNumberStr;
+        } else {
+            this.romanNumberStr = romanNumberStr.toUpperCase();
+        }
     }
 
     public void validate() {
-        romanNumberValidator.validateRomanNumber(romanNumberStr);
+        romanNumberValidator.validateRomanNumber(this);
     }
 
     public boolean isDigitOnes(int currentDigit) {
-        return Arrays.stream(RomanOnes).toList().contains(this.strAt(currentDigit));
+        return Arrays.stream(RomanOnes).toList().contains(digitAt(currentDigit));
+    }
+
+    public int arabicNumber() {
+        int arabicNumber = 0;
+
+        for (int currentDigit = 0; currentDigit < length(); currentDigit++) {
+            if (isDigitOnes(currentDigit)) {
+                arabicNumber += getOnes(currentDigit);
+            } else {
+                arabicNumber += 5;
+            }
+        }
+        return arabicNumber;
     }
 
     public int getOnes(int currentDigit) {
         int sum = 0;
         int nextDigit = currentDigit + 1;
-        Digits digit = RomanDigits[Arrays.stream(RomanOnes).toList().indexOf(this.strAt(currentDigit))];
 
-        if (nextDigit == length() || isNextDigitEqualOrLess(currentDigit)) {
+        if (!isThereCharInPosition(nextDigit) || isNextDigitEqualOrLess(currentDigit)) {
             sum = 1;
         } else {
             sum = -1;
         }
-        return sum * (RomanDigits[digit.ordinal()]).arabicValue();
+        return sum * RomanSymbols.valueOf(digitAt(currentDigit)).arabicValue();
     }
 
     private boolean isNextDigitEqualOrLess(int currentDigit) {
         int nextDigit = currentDigit + 1;
-        int currentArabicDigit = getArabicValue(strAt(currentDigit));
-        int nextArabicDigit = getArabicValue(strAt(nextDigit));
+        int currentArabicDigit = getArabicValue(digitAt(currentDigit));
+        int nextArabicDigit = getArabicValue(digitAt(nextDigit));
         return nextArabicDigit <= currentArabicDigit;
     }
 
     private int getArabicValue (String romanDigit) {
-        int arabicValue = 0;
-        List<RomanSymbols> romanSymbols = enumValuesInList(RomanSymbols.class);
-
-        for (RomanSymbols romanSymbol : romanSymbols) {
-            if (romanSymbol.name().equals(romanDigit)) {
-                arabicValue = romanSymbol.arabicValue();
-                break;
-            }
-        }
-        return arabicValue;
+        return RomanSymbols.valueOf(romanDigit).arabicValue();
     }
 
-    private String strAt(int currentDigit) {
-        return romanNumberStr.substring(currentDigit, currentDigit + 1);
+    public String digitAt(int position) {
+        return romanNumberStr.substring(position, position + 1);
     }
 
     public int length() {
         return romanNumberStr.length();
+    }
+
+    public boolean isNull() {
+        return romanNumberStr == null;
+    }
+
+    public boolean isThereCharInPosition(int position) {
+        return (position < length());
     }
 }

@@ -8,6 +8,11 @@ public class NumberConverter {
     static final String[] RomanTens = {X.name(), C.name(), M.name()};
     static final String[] RomanFives = {V.name(), L.name(), D.name()};
     static final Digits[] RomanDigits = {UNIT, TEN, HUNDRED, THOUSAND};
+    private final RomanNumber romanNumber;
+
+    public NumberConverter(RomanNumber romanNumber) {
+        this.romanNumber = romanNumber;
+    }
 
     public String parseArabicToRoman(final int arabicNumberSum) {
         String romanNumber = "";
@@ -67,17 +72,9 @@ public class NumberConverter {
     }
 
     public int parseRomanToArabic(final String romanNumberStr) {
-        RomanNumber romanNumber = new RomanNumber(romanNumberStr);
+        romanNumber.setRomanNumberStr(romanNumberStr);
         romanNumber.validate();
-        int arabicNumber = 0;
 
-        for (int currentDigit = 0; currentDigit < romanNumber.length(); currentDigit++) {
-            if (romanNumber.isDigitOnes(currentDigit)) {
-                arabicNumber += romanNumber.getOnes(currentDigit);
-            } else {
-                arabicNumber += 5;
-            }
-        }
-        return arabicNumber;
+        return romanNumber.arabicNumber();
     }
 }
