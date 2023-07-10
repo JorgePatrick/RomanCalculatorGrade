@@ -53,7 +53,7 @@ public class RomanNumber {
         return sum * RomanSymbols.valueOf(digitAt(currentDigit)).arabicValue();
     }
 
-    private boolean isNextDigitEqualOrLess(int currentDigit) {
+    public boolean isNextDigitEqualOrLess(int currentDigit) {
         int nextDigit = currentDigit + 1;
         int currentArabicDigit = getArabicValue(digitAt(currentDigit));
         int nextArabicDigit = getArabicValue(digitAt(nextDigit));
@@ -82,5 +82,18 @@ public class RomanNumber {
 
     public boolean isEmpty() {
         return romanNumberStr.isEmpty();
+    }
+
+    public boolean isNextDigitLess(int currentDigit) {
+        int nextDigit = currentDigit + 1;
+        int currentArabicDigit = getArabicValue(digitAt(currentDigit));
+        int nextArabicDigit = getArabicValue(digitAt(nextDigit));
+        return nextArabicDigit < currentArabicDigit;
+    }
+
+    public boolean isDigitLessThan(String digit, int position) {
+        int arabicDigitReceived = getArabicValue(digit);
+        int arabicDigitAt = getArabicValue(digitAt(position));
+        return arabicDigitAt < arabicDigitReceived;
     }
 }

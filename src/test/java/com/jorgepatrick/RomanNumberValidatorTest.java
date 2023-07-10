@@ -67,18 +67,13 @@ public class RomanNumberValidatorTest {
                 Arguments.of("VC", "Invalid Roman Number - No char different I allowed after one V"),
                 Arguments.of("VD", "Invalid Roman Number - No char different I allowed after one V"),
                 Arguments.of("VM", "Invalid Roman Number - No char different I allowed after one V"),
-
-/*
-                Arguments.of("XVX", "Invalid Roman Number"),
-                Arguments.of("XXXX", "Invalid Roman Number"),
-                Arguments.of("XXIX", "Valid Roman Number"),
-                Arguments.of("XCIX", "Valid Roman Number"),
-                Arguments.of("XXXIX", "Valid Roman Number"),
+                Arguments.of("XVX", "Invalid Roman Number - No char different I allowed after one V"),
+                Arguments.of("XXXX", "Invalid Roman Number - Invalid Roman Symbol after an XXX"),
                 Arguments.of("XD", "Invalid Roman Number - Invalid Roman Symbol after an X"),
                 Arguments.of("XM", "Invalid Roman Number - Invalid Roman Symbol after an X"),
                 Arguments.of("XLX", "Invalid Roman Number - Unexpected char after XL"),
                 Arguments.of("XCD", "Invalid Roman Number - Unexpected char after XC"),
-*/
+
                 Arguments.of("VIIII", "Invalid Roman Number - Invalid Roman Symbol after an III")
         );
     }

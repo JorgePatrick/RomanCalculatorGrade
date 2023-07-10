@@ -55,6 +55,7 @@ public class RomanCalculatorIntegrationTest {
                 Arguments.of("XX", "XVII", "XXXVII"),
                 Arguments.of("X", "XXVIII", "XXXVIII"),
                 Arguments.of("XX", "XIX", "XXXIX"),
+                Arguments.of("XXXIX", "I", "XL"),
                 Arguments.of("XX", "XX", "XL"),
                 Arguments.of("XX", "XXI", "XLI"),
                 Arguments.of("XXII", "XX", "XLII"),
@@ -66,6 +67,7 @@ public class RomanCalculatorIntegrationTest {
                 Arguments.of("XXIX", "XXIX", "LVIII"),
                 Arguments.of("XXX", "XXIX", "LIX"),
                 Arguments.of("XXX", "XXX", "LX")
+//                Arguments.of("XCIX", "I", "C")
         );
     }
     @ParameterizedTest
