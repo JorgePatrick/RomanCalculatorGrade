@@ -33,6 +33,7 @@ public class RomanNumberValidatorTest {
             romanNumber.setRomanNumberStr(romanNumberStr);
 //            Methods to mock
 //            romanNumber.isNull();
+//            romanNumber.isEmpty();
 //            romanNumber.length();
 //            romanNumber.digitAt(int: currentDigit);
 //            romanNumber.isThereCharInPosition(int: nextDigit);

@@ -10,6 +10,10 @@ public class RomanNumberValidator {
             throw new IllegalArgumentException("Roman Number Cannot be Null");
         }
 
+        if (romanNumber.isEmpty()) {
+            throw new IllegalArgumentException("Roman Number Cannot be Empty");
+        }
+
         for (int currentDigit = 0; currentDigit < romanNumber.length(); currentDigit++) {
             if (!isDigitRomanSymbol(romanNumber.digitAt(currentDigit))) {
                 throw new IllegalArgumentException("Invalid Roman Digit");

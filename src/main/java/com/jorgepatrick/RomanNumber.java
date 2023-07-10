@@ -79,4 +79,8 @@ public class RomanNumber {
     public boolean isThereCharInPosition(int position) {
         return (position < length());
     }
+
+    public boolean isEmpty() {
+        return romanNumberStr.isEmpty();
+    }
 }
