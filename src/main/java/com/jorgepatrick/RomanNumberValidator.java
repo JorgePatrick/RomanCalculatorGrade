@@ -1,6 +1,8 @@
 package com.jorgepatrick;
 
+import java.util.List;
 import static com.jorgepatrick.RomanSymbols.*;
+import static com.jorgepatrick.Utilities.enumValuesInList;
 
 public class RomanNumberValidator {
     public void validateRomanNumber(final RomanNumber romanNumber) {
@@ -78,12 +80,14 @@ public class RomanNumberValidator {
     }
 
     private boolean isDigitRomanSymbol(String romanDigit) {
-        try {
-            RomanSymbols.valueOf(romanDigit);
-        } catch (Exception e) {
-            return false;
+        List<RomanSymbols> romanSymbols = enumValuesInList(RomanSymbols.class);
+
+        for (RomanSymbols romanSymbol : romanSymbols) {
+            if (romanSymbol.name().equals(romanDigit)) {
+                return true;
+            }
         }
 
-        return true;
+        return false;
     }
 }
