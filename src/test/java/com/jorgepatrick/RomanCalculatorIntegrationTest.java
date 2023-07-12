@@ -82,8 +82,8 @@ public class RomanCalculatorIntegrationTest {
     private static Stream<Arguments> provideNonRomanNumbersForValidation() {
         return Stream.of(
                 Arguments.of(null, null, "Roman Number Cannot be Null"),
-                Arguments.of("A", "A", "Invalid Roman Digit"),
-                Arguments.of("XVAI", "XVAI", "Invalid Roman Digit"),
+                Arguments.of("A", "A", "Invalid Roman Digit (A)"),
+                Arguments.of("XVZI", "XVZI", "Invalid Roman Digit (Z)"),
                 Arguments.of("IIII", "IIII", "Invalid Roman Number - Invalid Roman Symbol after an III"),
                 Arguments.of("IXCI", "IXCI", "Invalid Roman Number - Unexpected char after IX"),
                 Arguments.of("IL", "IL", "Invalid Roman Number - Invalid Roman Symbol after an I"),

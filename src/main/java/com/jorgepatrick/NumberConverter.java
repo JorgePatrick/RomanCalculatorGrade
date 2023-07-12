@@ -1,13 +1,12 @@
 package com.jorgepatrick;
 
-import static com.jorgepatrick.Digits.*;
 import static com.jorgepatrick.RomanSymbols.*;
 
 public class NumberConverter {
     static final String[] RomanOnes = {I.name(), X.name(), C.name(), M.name()};
     static final String[] RomanTens = {X.name(), C.name(), M.name()};
     static final String[] RomanFives = {V.name(), L.name(), D.name()};
-    static final Digits[] RomanDigits = {UNIT, TEN, HUNDRED, THOUSAND};
+    static final PowerOfTenNumbers[] PowerOfTenNumber = PowerOfTenNumbers.values();
     private final RomanNumber romanNumber;
 
     public NumberConverter(RomanNumber romanNumber) {
@@ -16,17 +15,17 @@ public class NumberConverter {
 
     public String parseArabicToRoman(final int arabicNumberSum) {
         String romanNumber = "";
-        String arabicNumberString = String.valueOf(arabicNumberSum);
+        int arabicNumberLength = String.valueOf(arabicNumberSum).length();
 
-        int[] arabicDigits = splitNumberInReverse(arabicNumberSum, arabicNumberString.length());
+        int[] arabicDigits = splitNumberInReverse(arabicNumberSum, arabicNumberLength);
 
-        for(int position = arabicNumberString.length() - 1; position >= 0; position--) {
-            romanNumber += setRomanDigit(arabicDigits[position], RomanDigits[position]);
+        for(int position = arabicNumberLength - 1; position >= 0; position--) {
+            romanNumber += getRomanDigit(arabicDigits, position);
         }
         return romanNumber;
     }
 
-    private int[] splitNumberInReverse(int numberToSplit, int length) {
+    private int[] splitNumberInReverse(int numberToSplit, final int length) {
         int[] numberInReverse = new int[length];
         int position = 0;
 
@@ -38,7 +37,10 @@ public class NumberConverter {
         return numberInReverse;
     }
 
-    private String setRomanDigit(int arabicDigit, Digits digit) {
+    private String getRomanDigit(final int[] arabicDigits, final int position) {
+        int arabicDigit = arabicDigits[position];
+        int powerOfTenPosition = PowerOfTenNumber[position].ordinal();
+
         String romanDigit = "";
         int onesQuantity = 0;
 
@@ -47,26 +49,26 @@ public class NumberConverter {
         }
 
         if (arabicDigit == 9) {
-            return RomanOnes[digit.ordinal()] + RomanTens[digit.ordinal()];
+            return RomanOnes[powerOfTenPosition] + RomanTens[powerOfTenPosition];
         }
 
         if (arabicDigit == 5) {
-            return RomanFives[digit.ordinal()];
+            return RomanFives[powerOfTenPosition];
         }
 
         if (arabicDigit == 4) {
-            return RomanOnes[digit.ordinal()] + RomanFives[digit.ordinal()];
+            return RomanOnes[powerOfTenPosition] + RomanFives[powerOfTenPosition];
         }
 
         if (arabicDigit > 5) {
-            romanDigit = RomanFives[digit.ordinal()];
+            romanDigit = RomanFives[powerOfTenPosition];
             onesQuantity = arabicDigit - 5;
         } else {
             onesQuantity = arabicDigit;
         }
 
         for (int i = 0; i < onesQuantity; i++) {
-            romanDigit += RomanOnes[digit.ordinal()];
+            romanDigit += RomanOnes[powerOfTenPosition];
         }
         return romanDigit;
     }

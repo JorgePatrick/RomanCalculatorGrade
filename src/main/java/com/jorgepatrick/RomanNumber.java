@@ -2,6 +2,7 @@ package com.jorgepatrick;
 
 import java.util.Arrays;
 import static com.jorgepatrick.RomanSymbols.*;
+import static com.jorgepatrick.ComparisonResult.*;
 
 public class RomanNumber {
     private String romanNumberStr;
@@ -14,7 +15,7 @@ public class RomanNumber {
 
     public void setRomanNumberStr(String romanNumberStr) {
         if (romanNumberStr == null) {
-            this.romanNumberStr = romanNumberStr;
+            this.romanNumberStr = null;
         } else {
             this.romanNumberStr = romanNumberStr.toUpperCase();
         }
@@ -33,7 +34,7 @@ public class RomanNumber {
 
         for (int currentDigit = 0; currentDigit < length(); currentDigit++) {
             if (isDigitOnes(currentDigit)) {
-                arabicNumber += getOnes(currentDigit);
+                arabicNumber += getValueOnes(currentDigit);
             } else {
                 arabicNumber += 5;
             }
@@ -41,26 +42,20 @@ public class RomanNumber {
         return arabicNumber;
     }
 
-    public int getOnes(int currentDigit) {
-        int sum = 0;
+    public int getValueOnes(int currentDigit) {
+        int value = 0;
         int nextDigit = currentDigit + 1;
 
-        if (!isThereCharInPosition(nextDigit) || isNextDigitEqualOrLess(currentDigit)) {
-            sum = 1;
+        if (isThereCharInPosition(nextDigit) &&
+            isFirstDigit(digitAt(currentDigit), digitAt(nextDigit)).equals(LESS)) {
+            value = -1;
         } else {
-            sum = -1;
+            value = 1;
         }
-        return sum * RomanSymbols.valueOf(digitAt(currentDigit)).arabicValue();
+        return value * getArabicValueOfRomanSymbol(digitAt(currentDigit));
     }
 
-    public boolean isNextDigitEqualOrLess(int currentDigit) {
-        int nextDigit = currentDigit + 1;
-        int currentArabicDigit = getArabicValue(digitAt(currentDigit));
-        int nextArabicDigit = getArabicValue(digitAt(nextDigit));
-        return nextArabicDigit <= currentArabicDigit;
-    }
-
-    private int getArabicValue (String romanDigit) {
+    private int getArabicValueOfRomanSymbol(String romanDigit) {
         return RomanSymbols.valueOf(romanDigit).arabicValue();
     }
 
@@ -84,16 +79,17 @@ public class RomanNumber {
         return romanNumberStr.isEmpty();
     }
 
-    public boolean isNextDigitLess(int currentDigit) {
-        int nextDigit = currentDigit + 1;
-        int currentArabicDigit = getArabicValue(digitAt(currentDigit));
-        int nextArabicDigit = getArabicValue(digitAt(nextDigit));
-        return nextArabicDigit < currentArabicDigit;
-    }
+    public ComparisonResult isFirstDigit (String firstDigit, String secondDigit) {
+        int arabicFirstDigit = getArabicValueOfRomanSymbol(firstDigit);
+        int arabicSecondDigit = getArabicValueOfRomanSymbol(secondDigit);
+        if (arabicFirstDigit < arabicSecondDigit) {
+            return LESS;
+        }
 
-    public boolean isDigitLessThan(String digit, int position) {
-        int arabicDigitReceived = getArabicValue(digit);
-        int arabicDigitAt = getArabicValue(digitAt(position));
-        return arabicDigitAt < arabicDigitReceived;
+        if (arabicFirstDigit == arabicSecondDigit) {
+            return EQUAL;
+        }
+
+        return GREATER;
     }
 }

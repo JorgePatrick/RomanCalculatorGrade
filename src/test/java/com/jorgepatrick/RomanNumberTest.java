@@ -84,7 +84,7 @@ class RomanNumberTest {
     @MethodSource("provideRomanNumbersForValueOfOnes")
     public void getValueOfOnes(String romanNumberStr, int arabicValueOfOne) {
         romanNumber.setRomanNumberStr(romanNumberStr);
-        assertEquals(arabicValueOfOne, romanNumber.getOnes(0));
+        assertEquals(arabicValueOfOne, romanNumber.getValueOnes(0));
     }
     private static Stream<Arguments> provideRomanNumbersForValueOfOnes() {
         return Stream.of(
