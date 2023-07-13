@@ -7,6 +7,9 @@ import static com.jorgepatrick.RomanSymbols.*;
 import static com.jorgepatrick.Utilities.enumValuesInList;
 
 public class RomanNumberValidator {
+
+    static final RomanSymbols[] romanSymbols = RomanSymbols.values();
+
     public void validateRomanNumber(final RomanNumber romanNumber) {
         if (romanNumber.isNull()) {
             throw new IllegalArgumentException("Roman Number Cannot be Null");
@@ -31,52 +34,20 @@ public class RomanNumberValidator {
 
             switch (RomanSymbols.valueOf(romanNumber.digitAt(currentDigit))){
                 case I -> {
-                    validateI(romanNumber, nextDigit);
+//                    validateI(romanNumber, nextDigit);
+                    currentDigit = validateOnes(romanNumber, currentDigit);
                 }
                 case V -> {
                     validateV(romanNumber, nextDigit);
                 }
                 case X -> {
-                    currentDigit = validateX(romanNumber, currentDigit);
+//                    currentDigit = validateX(romanNumber, currentDigit);
+                    currentDigit = validateOnes(romanNumber, currentDigit);
                 }
                 case L, C, D, M -> {
                     break;
                 }
             }
-        }
-    }
-
-    private void validateI(RomanNumber romanNumber, int nextDigit) {
-        int twoAfterCurrentDigit = nextDigit + 1;
-
-        switch (RomanSymbols.valueOf(romanNumber.digitAt(nextDigit))){
-            case I -> {
-                if (!romanNumber.isThereCharInPosition(twoAfterCurrentDigit)) {
-                    break;
-                }
-
-                if (!romanNumber.digitAt(twoAfterCurrentDigit).equals(I.name())) {
-                    throw new IllegalArgumentException("Invalid Roman Number - After two I there can only be another I");
-                }
-
-                int threeAfterCurrentDigit = nextDigit + 2;
-
-                if (romanNumber.isThereCharInPosition(threeAfterCurrentDigit)) {
-                    throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an III");
-                }
-            }
-            case V -> {
-                if (twoAfterCurrentDigit < romanNumber.length()) {
-                    throw new IllegalArgumentException("Invalid Roman Number - Unexpected char after IV");
-                }
-            }
-            case X -> {
-                if (twoAfterCurrentDigit < romanNumber.length()) {
-                    throw new IllegalArgumentException("Invalid Roman Number - Unexpected char after IX");
-                }
-            }
-            case L, C, D, M ->
-                    throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an I");
         }
     }
 
@@ -88,57 +59,60 @@ public class RomanNumberValidator {
         }
     }
 
-    private int validateX(RomanNumber romanNumber, int currentDigit) {
-        int currentDigitReturn = currentDigit;
+    private int validateOnes(RomanNumber romanNumber, int currentDigit) {
+        int digitReturn = currentDigit;
         int nextDigit = currentDigit + 1;
         int twoAfterCurrentDigit = currentDigit + 2;
         int threeAfterCurrentDigit = currentDigit + 3;
 
         ComparisonResult firstDigitIs = romanNumber.isFirstDigit(romanNumber.digitAt(currentDigit), romanNumber.digitAt(nextDigit));
         if (firstDigitIs.equals(GREATER)) {
-            return currentDigit;
+            return digitReturn;
         }
 
-        switch (RomanSymbols.valueOf(romanNumber.digitAt(nextDigit))){
-            case X -> {
-                if (!romanNumber.isThereCharInPosition(twoAfterCurrentDigit)) {
-                    break;
-                }
+        int positionRomanSymbol =  RomanSymbols.valueOf(romanNumber.digitAt(currentDigit)).ordinal();
+        RomanSymbols currentRomanSymbol = romanSymbols[positionRomanSymbol];
+        RomanSymbols aboveRomanSymbol = romanSymbols[positionRomanSymbol + 1];
+        RomanSymbols twoAboveRomanSymbol = romanSymbols[positionRomanSymbol + 2];
 
-                firstDigitIs = romanNumber.isFirstDigit(romanNumber.digitAt(nextDigit), romanNumber.digitAt(twoAfterCurrentDigit));
+        if (RomanSymbols.valueOf(romanNumber.digitAt(nextDigit)).equals(currentRomanSymbol)){
+            digitReturn = nextDigit;
 
-                if (firstDigitIs.equals(LESS)) {
-                    throw new IllegalArgumentException("Invalid Roman Number - After two X there can only be another X or a lesser symbol");
-                }
-
-                if (firstDigitIs.equals(GREATER)) {
-                    currentDigitReturn = twoAfterCurrentDigit;
-                    break;
-                }
-
-                if (romanNumber.isThereCharInPosition(threeAfterCurrentDigit)) {
-                    firstDigitIs = romanNumber.isFirstDigit(romanNumber.digitAt(twoAfterCurrentDigit), romanNumber.digitAt(threeAfterCurrentDigit));
-                    if (firstDigitIs.equals(LESS) ||
-                        firstDigitIs.equals(EQUAL)) {
-                        throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an XXX");
-                    }
-                    currentDigitReturn = threeAfterCurrentDigit;
-                }
+            if (!romanNumber.isThereCharInPosition(twoAfterCurrentDigit)) {
+                return digitReturn;
             }
-            case L, C -> {
-                if (romanNumber.isThereCharInPosition(twoAfterCurrentDigit)) {
-                    firstDigitIs = romanNumber.isFirstDigit(X.name(), romanNumber.digitAt(twoAfterCurrentDigit));
-                    if (!firstDigitIs.equals(GREATER)) {
-                        throw new IllegalArgumentException("Invalid Roman Number - Unexpected char after X" + romanNumber.digitAt(nextDigit));
-                    }
-                }
-                currentDigitReturn = nextDigit;
+
+            firstDigitIs = romanNumber.isFirstDigit(romanNumber.digitAt(nextDigit), romanNumber.digitAt(twoAfterCurrentDigit));
+
+            if (firstDigitIs.equals(LESS)) {
+                throw new IllegalArgumentException("Invalid Roman Number - After two " + currentRomanSymbol + " there can only be another " + currentRomanSymbol + " or a lesser symbol");
             }
-            case D, M ->
-                    throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an X");
+
+            if (firstDigitIs.equals(EQUAL) &&
+                romanNumber.isThereCharInPosition(threeAfterCurrentDigit)) {
+                firstDigitIs = romanNumber.isFirstDigit(romanNumber.digitAt(twoAfterCurrentDigit), romanNumber.digitAt(threeAfterCurrentDigit));
+                if (firstDigitIs.equals(LESS) ||
+                    firstDigitIs.equals(EQUAL)) {
+                    throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an " + currentRomanSymbol + currentRomanSymbol + currentRomanSymbol);
+                }
+                digitReturn = twoAfterCurrentDigit;
+            }
+
+            return digitReturn;
         }
 
-        return currentDigitReturn;
+        if (RomanSymbols.valueOf(romanNumber.digitAt(nextDigit)).equals(aboveRomanSymbol) ||
+            RomanSymbols.valueOf(romanNumber.digitAt(nextDigit)).equals(twoAboveRomanSymbol)) {
+            if (romanNumber.isThereCharInPosition(twoAfterCurrentDigit)) {
+                firstDigitIs = romanNumber.isFirstDigit(currentRomanSymbol.name(), romanNumber.digitAt(twoAfterCurrentDigit));
+                if (!firstDigitIs.equals(GREATER)) {
+                    throw new IllegalArgumentException("Invalid Roman Number - Unexpected char after " + currentRomanSymbol + romanNumber.digitAt(nextDigit));
+                }
+            }
+            return digitReturn;
+        }
+
+        throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an " + currentRomanSymbol);
     }
 
     private boolean isDigitRomanSymbol(String romanDigit) {
