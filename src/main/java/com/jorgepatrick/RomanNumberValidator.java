@@ -33,28 +33,15 @@ public class RomanNumberValidator {
             }
 
             switch (RomanSymbols.valueOf(romanNumber.digitAt(currentDigit))){
-                case I -> {
-//                    validateI(romanNumber, nextDigit);
+                case I, X -> {
                     currentDigit = validateOnes(romanNumber, currentDigit);
                 }
-                case V -> {
-                    validateV(romanNumber, nextDigit);
+                case V, L -> {
+                    validateFives(romanNumber, currentDigit);
                 }
-                case X -> {
-//                    currentDigit = validateX(romanNumber, currentDigit);
-                    currentDigit = validateOnes(romanNumber, currentDigit);
-                }
-                case L, C, D, M -> {
+                case C, D, M -> {
                     break;
                 }
-            }
-        }
-    }
-
-    private void validateV(RomanNumber romanNumber, int nextDigit) {
-        for (int currentDigit = nextDigit; currentDigit < romanNumber.length(); currentDigit++) {
-            if (!romanNumber.digitAt(currentDigit).equals(I.name())) {
-                throw new IllegalArgumentException("Invalid Roman Number - No char different I allowed after one V");
             }
         }
     }
@@ -93,7 +80,7 @@ public class RomanNumberValidator {
                 firstDigitIs = romanNumber.isFirstDigit(romanNumber.digitAt(twoAfterCurrentDigit), romanNumber.digitAt(threeAfterCurrentDigit));
                 if (firstDigitIs.equals(LESS) ||
                     firstDigitIs.equals(EQUAL)) {
-                    throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an " + currentRomanSymbol + currentRomanSymbol + currentRomanSymbol);
+                    throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after " + currentRomanSymbol + currentRomanSymbol + currentRomanSymbol);
                 }
                 digitReturn = twoAfterCurrentDigit;
             }
@@ -112,7 +99,20 @@ public class RomanNumberValidator {
             return digitReturn;
         }
 
-        throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after an " + currentRomanSymbol);
+        throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after " + currentRomanSymbol);
+    }
+
+    private void validateFives(RomanNumber romanNumber, int currentDigit) {
+        ComparisonResult firstDigitIs;
+        int positionRomanSymbol =  RomanSymbols.valueOf(romanNumber.digitAt(currentDigit)).ordinal();
+        RomanSymbols currentRomanSymbol = romanSymbols[positionRomanSymbol];
+
+        for (int nextDigits = currentDigit + 1; nextDigits < romanNumber.length(); nextDigits++) {
+            firstDigitIs = romanNumber.isFirstDigit(currentRomanSymbol.name(), romanNumber.digitAt(nextDigits));
+            if (!firstDigitIs.equals(GREATER)) {
+                throw new IllegalArgumentException("Invalid Roman Number - After a " + currentRomanSymbol + " there can only be lesser symbols");
+            }
+        }
     }
 
     private boolean isDigitRomanSymbol(String romanDigit) {

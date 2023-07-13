@@ -36,7 +36,7 @@ public class RomanNumber {
             if (isDigitOnes(currentDigit)) {
                 arabicNumber += getValueOnes(currentDigit);
             } else {
-                arabicNumber += 5;
+                arabicNumber += getValueFives(currentDigit);
             }
         }
         return arabicNumber;
@@ -53,6 +53,10 @@ public class RomanNumber {
             value = 1;
         }
         return value * getArabicValueOfRomanSymbol(digitAt(currentDigit));
+    }
+
+    public int getValueFives(int currentDigit) {
+        return getArabicValueOfRomanSymbol(digitAt(currentDigit));
     }
 
     private int getArabicValueOfRomanSymbol(String romanDigit) {
