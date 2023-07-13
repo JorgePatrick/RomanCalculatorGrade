@@ -1,38 +1,45 @@
 package com.jorgepatrick;
 
-import static com.jorgepatrick.Digits.*;
 import static com.jorgepatrick.RomanSymbols.*;
 
 public class NumberConverter {
+    static final String[] RomanOnes = {I.name(), X.name(), C.name(), M.name()};
+    static final String[] RomanTens = {X.name(), C.name(), M.name()};
+    static final String[] RomanFives = {V.name(), L.name(), D.name()};
+    static final PowerOfTenNumbers[] PowerOfTenNumber = PowerOfTenNumbers.values();
+    private final RomanNumber romanNumber;
 
-    static final RomanSymbols[] RomanOnes = {I, X, C, M};
-    static final RomanSymbols[] RomanTens = {X, C, M};
-    static final RomanSymbols[] RomanFives = {V, L, D};
-    private final RomanNumberValidator romanNumberValidator;
-
-    public NumberConverter(RomanNumberValidator romanNumberValidator) {
-        this.romanNumberValidator = romanNumberValidator;
+    public NumberConverter(RomanNumber romanNumber) {
+        this.romanNumber = romanNumber;
     }
 
     public String parseArabicToRoman(final int arabicNumberSum) {
         String romanNumber = "";
+        int arabicNumberLength = String.valueOf(arabicNumberSum).length();
 
-        int[] arabicDigits = new int[2];
-        String arabicNumberString = String.valueOf(arabicNumberSum);
-        for(int i = 0; i < arabicNumberString.length(); i++) {
-            arabicDigits[i] = Character.digit(arabicNumberString.charAt(i), 10);
-        }
-        if (arabicNumberString.length() == 2){
-            romanNumber += setRomanDigit(arabicDigits[0], TEN);
-            romanNumber += setRomanDigit(arabicDigits[1], UNIT);
-        } else {
-            romanNumber += setRomanDigit(arabicDigits[0], UNIT);
-        }
+        int[] arabicDigits = splitNumberInReverse(arabicNumberSum, arabicNumberLength);
 
+        for(int position = arabicNumberLength - 1; position >= 0; position--) {
+            romanNumber += getRomanDigit(arabicDigits, position);
+        }
         return romanNumber;
     }
 
-    private String setRomanDigit(int arabicDigit, Digits digit) {
+    private int[] splitNumberInReverse(int numberToSplit, final int length) {
+        int[] numberInReverse = new int[length];
+        int position = 0;
+
+        while (numberToSplit > 0) {
+            numberInReverse[position] =  ( numberToSplit % 10);
+            numberToSplit = numberToSplit / 10;
+            position++;
+        }
+        return numberInReverse;
+    }
+
+    private String getRomanDigit(final int[] arabicDigits, final int position) {
+        int arabicDigit = arabicDigits[position];
+        int powerOfTenPosition = PowerOfTenNumber[position].ordinal();
 
         String romanDigit = "";
         int onesQuantity = 0;
@@ -42,55 +49,34 @@ public class NumberConverter {
         }
 
         if (arabicDigit == 9) {
-            return RomanOnes[digit.value()].value() + RomanTens[digit.value()].value();
+            return RomanOnes[powerOfTenPosition] + RomanTens[powerOfTenPosition];
         }
 
         if (arabicDigit == 5) {
-            return RomanFives[digit.value()].value();
+            return RomanFives[powerOfTenPosition];
         }
 
         if (arabicDigit == 4) {
-            return RomanOnes[digit.value()].value() + RomanFives[digit.value()].value();
+            return RomanOnes[powerOfTenPosition] + RomanFives[powerOfTenPosition];
         }
 
         if (arabicDigit > 5) {
-            romanDigit = RomanFives[digit.value()].value();
+            romanDigit = RomanFives[powerOfTenPosition];
             onesQuantity = arabicDigit - 5;
-
         } else {
             onesQuantity = arabicDigit;
         }
 
         for (int i = 0; i < onesQuantity; i++) {
-            romanDigit += RomanOnes[digit.value()].value();
+            romanDigit += RomanOnes[powerOfTenPosition];
         }
-
         return romanDigit;
     }
 
-    public int parseRomanToArabic(final String romanNumber) {
+    public int parseRomanToArabic(final String romanNumberStr) {
+        romanNumber.setRomanNumberStr(romanNumberStr);
+        romanNumber.validate();
 
-        romanNumberValidator.validateRomanNumber(romanNumber);
-
-        int unit = 0;
-
-        for (int currentDigit = 0; currentDigit < romanNumber.length(); currentDigit++) {
-            if (romanNumber.toUpperCase().charAt(currentDigit) == I.value().charAt(0)) {
-                int nextDigit = currentDigit + 1;
-                if (nextDigit == romanNumber.length() ||
-                    romanNumber.toUpperCase().charAt(nextDigit) == I.value().charAt(0)) {
-                    unit += 1;
-                } else {
-                    unit -= 1;
-                }
-            }
-
-            if (romanNumber.toUpperCase().charAt(currentDigit) == V.value().charAt(0)) {
-                unit += 5;
-            }
-        }
-
-        return unit;
+        return romanNumber.arabicNumber();
     }
-
 }

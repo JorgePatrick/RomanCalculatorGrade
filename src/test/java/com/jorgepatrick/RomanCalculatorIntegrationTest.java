@@ -11,12 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RomanCalculatorIntegrationTest {
     private RomanCalculator romanCalculator;
     private NumberConverter converter;
+    private RomanNumber romanNumber;
     private RomanNumberValidator romanNumberValidator;
 
     @BeforeEach
     public void setup(){
         romanNumberValidator = new RomanNumberValidator();
-        converter = new NumberConverter(romanNumberValidator);
+        romanNumber = new RomanNumber(romanNumberValidator);
+        converter = new NumberConverter(romanNumber);
         romanCalculator = new RomanCalculator(converter);
     }
 
@@ -39,7 +41,33 @@ public class RomanCalculatorIntegrationTest {
                 Arguments.of("III", "VI", "IX"),
                 Arguments.of("VII", "V", "XII"),
                 Arguments.of("VI", "VIII", "XIV"),
-                Arguments.of("VIII", "VIII", "XVI")
+                Arguments.of("VIII", "VIII", "XVI"),
+                Arguments.of("X", "VII", "XVII"),
+                Arguments.of("IX", "IX", "XVIII"),
+                Arguments.of("X", "IX", "XIX"),
+                Arguments.of("X", "X", "XX"),
+                Arguments.of("XIV", "VII", "XXI"),
+                Arguments.of("XIII", "IX", "XXII"),
+                Arguments.of("XIII", "X", "XXIII"),
+                Arguments.of("XII", "XII", "XXIV"),
+                Arguments.of("XX", "V", "XXV"),
+                Arguments.of("XXX", "VI", "XXXVI"),
+                Arguments.of("XX", "XVII", "XXXVII"),
+                Arguments.of("X", "XXVIII", "XXXVIII"),
+                Arguments.of("XX", "XIX", "XXXIX"),
+                Arguments.of("XXXIX", "I", "XL"),
+                Arguments.of("XX", "XX", "XL"),
+                Arguments.of("XX", "XXI", "XLI"),
+                Arguments.of("XXII", "XX", "XLII"),
+                Arguments.of("XX", "XXIII", "XLIII"),
+                Arguments.of("XXIV", "XX", "XLIV"),
+                Arguments.of("XXX", "XV", "XLV"),
+                Arguments.of("XXVIII", "XXVIII", "LVI"),
+                Arguments.of("XXVIII", "XXIX", "LVII"),
+                Arguments.of("XXIX", "XXIX", "LVIII"),
+                Arguments.of("XXX", "XXIX", "LIX"),
+                Arguments.of("XXX", "XXX", "LX")
+//                Arguments.of("XCIX", "I", "C")
         );
     }
     @ParameterizedTest
@@ -54,8 +82,8 @@ public class RomanCalculatorIntegrationTest {
     private static Stream<Arguments> provideNonRomanNumbersForValidation() {
         return Stream.of(
                 Arguments.of(null, null, "Roman Number Cannot be Null"),
-                Arguments.of("A", "A", "Invalid Roman Digit"),
-                Arguments.of("XVAI", "XVAI", "Invalid Roman Digit"),
+                Arguments.of("A", "A", "Invalid Roman Digit (A)"),
+                Arguments.of("XVZI", "XVZI", "Invalid Roman Digit (Z)"),
                 Arguments.of("IIII", "IIII", "Invalid Roman Number - Invalid Roman Symbol after an III"),
                 Arguments.of("IXCI", "IXCI", "Invalid Roman Number - Unexpected char after IX"),
                 Arguments.of("IL", "IL", "Invalid Roman Number - Invalid Roman Symbol after an I"),

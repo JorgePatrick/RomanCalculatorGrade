@@ -8,7 +8,6 @@ public class RomanCalculator {
     }
 
     public String sumRomanNumbers(final String firstAddend, final String secondAddend) {
-
         final int firstArabicNumber = converter.parseRomanToArabic(firstAddend);
         final int secondArabicNumber = converter.parseRomanToArabic(secondAddend);
 
@@ -16,6 +15,5 @@ public class RomanCalculator {
 
         return converter.parseArabicToRoman(arabicNumberSum);
     }
-
 }
 
