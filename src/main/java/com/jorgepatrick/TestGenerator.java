@@ -4,8 +4,8 @@ public class TestGenerator {
     private RomanNumber romanNumber = new RomanNumber(romanNumberValidator);
     private NumberConverter numberConverter = new NumberConverter(romanNumber);
     public void numberConverterTest() {
-        int convertToRomanQtde = 178;
-        int convertToArabicQtde = 89;
+        int convertToRomanQtde = 3998;
+        int convertToArabicQtde = 1999;
         String testLine;
 
         System.out.println("convertToRoman");
@@ -24,8 +24,8 @@ public class TestGenerator {
     }
 
     public void romanCalculatorIntegrationTest() {
-        int sumResultQtde = 178;
-        int maxValueAddend = 89;
+        int sumResultQtde = 3998;
+        int maxValueAddend = 1999;
         String testLine;
         int firstAdend;
         int secondAdend;

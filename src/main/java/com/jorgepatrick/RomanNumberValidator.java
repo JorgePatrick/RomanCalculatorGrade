@@ -33,14 +33,14 @@ public class RomanNumberValidator {
             }
 
             switch (RomanSymbols.valueOf(romanNumber.digitAt(currentDigit))){
-                case I, X -> {
+                case I, X, C -> {
                     currentDigit = validateOnes(romanNumber, currentDigit);
                 }
-                case V, L -> {
+                case V, L, D -> {
                     validateFives(romanNumber, currentDigit);
                 }
-                case C, D, M -> {
-                    break;
+                case M -> {
+                    validateM(romanNumber, currentDigit);
                 }
             }
         }
@@ -112,6 +112,22 @@ public class RomanNumberValidator {
             if (!firstDigitIs.equals(GREATER)) {
                 throw new IllegalArgumentException("Invalid Roman Number - After a " + currentRomanSymbol + " there can only be lesser symbols");
             }
+        }
+    }
+
+    private void validateM(RomanNumber romanNumber, int currentDigit) {
+        int nextDigit = currentDigit + 1;
+        int twoAfterCurrentDigit = currentDigit + 2;
+        int threeAfterCurrentDigit = currentDigit + 3;
+
+        if (!romanNumber.isThereCharInPosition(threeAfterCurrentDigit)) {
+            return;
+        }
+
+        if (RomanSymbols.valueOf(romanNumber.digitAt(nextDigit)).equals(M) &&
+                RomanSymbols.valueOf(romanNumber.digitAt(twoAfterCurrentDigit)).equals(M) &&
+                RomanSymbols.valueOf(romanNumber.digitAt(threeAfterCurrentDigit)).equals(M)){
+            throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after MMM");
         }
     }
 

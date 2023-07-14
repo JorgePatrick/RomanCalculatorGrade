@@ -14,6 +14,10 @@ public class NumberConverter {
     }
 
     public String parseArabicToRoman(final int arabicNumberSum) {
+        if (arabicNumberSum > 3999) {
+            throw new IllegalArgumentException("Cannot convert number greater than 3999 to Roman");
+        }
+
         String romanNumber = "";
         int arabicNumberLength = String.valueOf(arabicNumberSum).length();
 
