@@ -82,7 +82,16 @@ public class RomanNumberValidatorTest {
                 Arguments.of("LXVIIL", "Invalid Roman Number - After a L there can only be lesser symbols"),
                 Arguments.of("LC", "Invalid Roman Number - After a L there can only be lesser symbols"),
                 Arguments.of("LD", "Invalid Roman Number - After a L there can only be lesser symbols"),
-                Arguments.of("LM", "Invalid Roman Number - After a L there can only be lesser symbols")
+                Arguments.of("LM", "Invalid Roman Number - After a L there can only be lesser symbols"),
+                Arguments.of("CCCC", "Invalid Roman Number - Invalid Roman Symbol after CCC"),
+                Arguments.of("CCD", "Invalid Roman Number - After two C there can only be another C or a lesser symbol"),
+                Arguments.of("CDC", "Invalid Roman Number - Unexpected char after CD"),
+                Arguments.of("CMM", "Invalid Roman Number - Unexpected char after CM"),
+                Arguments.of("DD", "Invalid Roman Number - After a D there can only be lesser symbols"),
+                Arguments.of("DCD", "Invalid Roman Number - After a D there can only be lesser symbols"),
+                Arguments.of("DXVIID", "Invalid Roman Number - After a D there can only be lesser symbols"),
+                Arguments.of("DM", "Invalid Roman Number - After a D there can only be lesser symbols"),
+                Arguments.of("MMMM", "Invalid Roman Number - Invalid Roman Symbol after MMM")
         );
     }
 

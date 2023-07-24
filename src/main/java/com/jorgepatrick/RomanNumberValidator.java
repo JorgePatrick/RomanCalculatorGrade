@@ -33,14 +33,14 @@ public class RomanNumberValidator {
             }
 
             switch (RomanSymbols.valueOf(romanNumber.digitAt(currentDigit))){
-                case I, X -> {
+                case I, X, C -> {
                     currentDigit = validateOnes(romanNumber, currentDigit);
                 }
-                case V, L -> {
+                case V, L, D -> {
                     validateFives(romanNumber, currentDigit);
                 }
-                case C, D, M -> {
-                    break;
+                case M -> {
+                    validateM(romanNumber, currentDigit);
                 }
             }
         }
@@ -115,15 +115,25 @@ public class RomanNumberValidator {
         }
     }
 
+    private void validateM(RomanNumber romanNumber, int currentDigit) {
+        int nextDigit = currentDigit + 1;
+        int twoAfterCurrentDigit = currentDigit + 2;
+        int threeAfterCurrentDigit = currentDigit + 3;
+
+        if (!romanNumber.isThereCharInPosition(threeAfterCurrentDigit)) {
+            return;
+        }
+
+        if (RomanSymbols.valueOf(romanNumber.digitAt(nextDigit)).equals(M) &&
+                RomanSymbols.valueOf(romanNumber.digitAt(twoAfterCurrentDigit)).equals(M) &&
+                RomanSymbols.valueOf(romanNumber.digitAt(threeAfterCurrentDigit)).equals(M)){
+            throw new IllegalArgumentException("Invalid Roman Number - Invalid Roman Symbol after MMM");
+        }
+    }
+
     private boolean isDigitRomanSymbol(String romanDigit) {
         List<RomanSymbols> romanSymbols = enumValuesInList(RomanSymbols.class);
 
-        for (RomanSymbols romanSymbol : romanSymbols) {
-            if (romanSymbol.name().equals(romanDigit)) {
-                return true;
-            }
-        }
-
-        return false;
+        return (romanSymbols.stream().anyMatch(e -> e.name().equals(romanDigit)));
     }
 }
