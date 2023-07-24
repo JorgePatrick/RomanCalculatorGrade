@@ -3,10 +3,6 @@ package com.jorgepatrick;
 import static com.jorgepatrick.RomanSymbols.*;
 
 public class NumberConverter {
-    static final String[] RomanOnes = {I.name(), X.name(), C.name(), M.name()};
-    static final String[] RomanTens = {X.name(), C.name(), M.name()};
-    static final String[] RomanFives = {V.name(), L.name(), D.name()};
-    static final PowerOfTenNumbers[] PowerOfTenNumber = PowerOfTenNumbers.values();
     private final RomanNumber romanNumber;
 
     public NumberConverter(RomanNumber romanNumber) {
@@ -20,7 +16,6 @@ public class NumberConverter {
 
         String romanNumber = "";
         int arabicNumberLength = String.valueOf(arabicNumberSum).length();
-
         int[] arabicDigits = splitNumberInReverse(arabicNumberSum, arabicNumberLength);
 
         for(int position = arabicNumberLength - 1; position >= 0; position--) {
@@ -29,7 +24,7 @@ public class NumberConverter {
         return romanNumber;
     }
 
-    private int[] splitNumberInReverse(int numberToSplit, final int length) {
+    private static int[] splitNumberInReverse(int numberToSplit, final int length) {
         int[] numberInReverse = new int[length];
         int position = 0;
 
@@ -41,38 +36,45 @@ public class NumberConverter {
         return numberInReverse;
     }
 
-    private String getRomanDigit(final int[] arabicDigits, final int position) {
-        int arabicDigit = arabicDigits[position];
-        int powerOfTenPosition = PowerOfTenNumber[position].ordinal();
+    private static String getRomanDigit(final int[] arabicDigits, final int position) {
+        final String[] RomanOnes = {I.name(), X.name(), C.name(), M.name()};
+        final String[] RomanTens = {X.name(), C.name(), M.name()};
+        final String[] RomanFives = {V.name(), L.name(), D.name()};
 
+        int arabicDigit = arabicDigits[position];
+
+        switch (arabicDigit) {
+            case 0 -> {
+                return "";
+            }
+            case 9 -> {
+                return RomanOnes[position] + RomanTens[position];
+            }
+            case 5 -> {
+                return RomanFives[position];
+            }
+            case 4 -> {
+                return RomanOnes[position] + RomanFives[position];
+            }
+        }
+
+        String romanDigit = getRomanDigit(position, RomanOnes, RomanFives, arabicDigit);
+        return romanDigit;
+    }
+
+    private static String getRomanDigit(int position, String[] RomanOnes, String[] RomanFives, int arabicDigit) {
         String romanDigit = "";
         int onesQuantity = 0;
 
-        if (arabicDigit == 0) {
-            return "";
-        }
-
-        if (arabicDigit == 9) {
-            return RomanOnes[powerOfTenPosition] + RomanTens[powerOfTenPosition];
-        }
-
-        if (arabicDigit == 5) {
-            return RomanFives[powerOfTenPosition];
-        }
-
-        if (arabicDigit == 4) {
-            return RomanOnes[powerOfTenPosition] + RomanFives[powerOfTenPosition];
-        }
-
         if (arabicDigit > 5) {
-            romanDigit = RomanFives[powerOfTenPosition];
+            romanDigit = RomanFives[position];
             onesQuantity = arabicDigit - 5;
         } else {
             onesQuantity = arabicDigit;
         }
 
         for (int i = 0; i < onesQuantity; i++) {
-            romanDigit += RomanOnes[powerOfTenPosition];
+            romanDigit += RomanOnes[position];
         }
         return romanDigit;
     }

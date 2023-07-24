@@ -6,7 +6,6 @@ import static com.jorgepatrick.ComparisonResult.*;
 
 public class RomanNumber {
     private String romanNumberStr;
-    static final String[] RomanOnes = {I.name(), X.name(), C.name(), M.name()};
     private final RomanNumberValidator romanNumberValidator;
 
     public RomanNumber(RomanNumberValidator romanNumberValidator) {
@@ -14,9 +13,7 @@ public class RomanNumber {
     }
 
     public void setRomanNumberStr(String romanNumberStr) {
-        if (romanNumberStr == null) {
-            this.romanNumberStr = null;
-        } else {
+        if (romanNumberStr != null) {
             this.romanNumberStr = romanNumberStr.toUpperCase();
         }
     }
@@ -26,6 +23,7 @@ public class RomanNumber {
     }
 
     public boolean isDigitOnes(int currentDigit) {
+        final String[] RomanOnes = {I.name(), X.name(), C.name(), M.name()};
         return Arrays.stream(RomanOnes).toList().contains(digitAt(currentDigit));
     }
 
@@ -59,7 +57,7 @@ public class RomanNumber {
         return getArabicValueOfRomanSymbol(digitAt(currentDigit));
     }
 
-    private int getArabicValueOfRomanSymbol(String romanDigit) {
+    private static int getArabicValueOfRomanSymbol(String romanDigit) {
         return RomanSymbols.valueOf(romanDigit).arabicValue();
     }
 

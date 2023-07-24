@@ -134,12 +134,6 @@ public class RomanNumberValidator {
     private boolean isDigitRomanSymbol(String romanDigit) {
         List<RomanSymbols> romanSymbols = enumValuesInList(RomanSymbols.class);
 
-        for (RomanSymbols romanSymbol : romanSymbols) {
-            if (romanSymbol.name().equals(romanDigit)) {
-                return true;
-            }
-        }
-
-        return false;
+        return (romanSymbols.stream().anyMatch(e -> e.name().equals(romanDigit)));
     }
 }
